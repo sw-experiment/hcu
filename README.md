@@ -1,4 +1,10 @@
-# Software Experiments in Data Science using Health Care Utilisation Data
+# Health Care Utilisation
+
+## Software Experiments in Data Science using Health Care Utilisation Data
+
+This is not intended for use as a tool or for academic research purposes.
+
+It is a scratch area for learning R in the context of health data.
 
 The repositroty name "hcu" is short for health care utilisation.
 
