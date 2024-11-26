@@ -1,0 +1,44 @@
+---
+title: "hcu"
+output: html_document
+date: "2024-11-26"
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r dependencies}
+if (!require(tidyverse))
+  install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+library(tidyverse)
+library(knitr)
+```
+
+# Health Care Utilisation Data [oecdhcu2023] Summary
+
+```{r wrangle}
+# read 2024 OECD health care utilisation data
+# and make all column names lower case and with _ word separators instead of space or dot  
+hcu <- read.csv("HEALTH_PROC-2023-1-EN-20240209T100941.csv") %>%
+rename_with(~ tolower(gsub("[\\. ]", "_", .x)))
+
+names(hcu)
+
+# Identify main types of data available
+kable(distinct(hcu, var, variable))
+kable(distinct(hcu, unit, measure))
+kable(distinct(hcu, cou, country))
+kable(distinct(hcu, yea, year))
+kable(distinct(hcu, flag_codes, flags))
+
+# Explore potentially heroin related measures
+kable(filter(distinct(hcu, var, variable, unit, measure), 
+             str_detect(variable, regex("(drug|opioid|heroin|psych|hiv|aids|mental|skin|derma|hepatitis|repiratory|lungs|infective endocarditis)", ignore_case = TRUE))))
+```
+# Drug related admissions
+
+
+
+# References
